@@ -42,18 +42,20 @@ abstract class AdminBaseController extends BaseController
     public function show($id)
     {
         $resource = $this->model->find($id);
+        $routes   = $this->getRoutes();
 
-        $this->setViewData(compact('resource'));
+        $this->setViewData(compact('resource', 'routes'));
 
         return $this->view();
     }
 
     public function store()
     {
+        dd(request()->all());
         $this->model->create(request()->all());
 
         return redirect(route($this->routes()['index']))
-            ->with('message', $this->getTitle() . ' created.');
+            ->with('message', $this->getArea() . ' created.');
     }
 
     public function update($id)
@@ -63,7 +65,7 @@ abstract class AdminBaseController extends BaseController
         $resource->update(request()->all());
 
         return redirect(route($this->routes()['index']))
-            ->with('message', $this->getTitle() . ' updated.');
+            ->with('message', $this->getArea() . ' updated.');
     }
 
     public function destroy($id)
@@ -73,7 +75,7 @@ abstract class AdminBaseController extends BaseController
         $resource->delete();
 
         return redirect(route($this->routes()['index']))
-            ->with('message', $this->getTitle() . ' removed.');
+            ->with('message', $this->getArea() . ' removed.');
     }
 
     /**
@@ -97,18 +99,14 @@ abstract class AdminBaseController extends BaseController
      */
     public function routes()
     {
-        $area = Str::lower(
-            Str::singular(
-                $this->getTitle()
-            )
-        );
+        $area = $this->getArea(true);
 
         return [
             'index'  => 'admin.' . $area . '.index',
             'show'   => 'admin.' . $area . '.show',
-            'create' => 'admin.' . $area . '.index',
-            'edit'   => 'admin.' . $area . '.index',
-            'delete' => 'admin.' . $area . '.index',
+            'create' => 'admin.' . $area . '.create',
+            'edit'   => 'admin.' . $area . '.edit',
+            'delete' => 'admin.' . $area . '.destroy',
         ];
     }
 
@@ -154,6 +152,19 @@ abstract class AdminBaseController extends BaseController
                 ->explode('\\', get_called_class())
                 ->last()
         );
+    }
+
+    protected function getArea($lowercase = false)
+    {
+        $singular = Str::singular(
+            $this->getTitle()
+        );
+
+        if ($lowercase) {
+            return Str::lower($singular);
+        }
+
+        return $singular;
     }
 
     protected function paginate($items, $perPage)

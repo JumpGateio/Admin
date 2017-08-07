@@ -12,7 +12,7 @@
       </button>
     @endif
   </div>
-  <a class="uk-button uk-button-primary uk-background-primary-light uk-text-white uk-button-small uk-float-right uk-margin-small-right" href="{{ route($routes['index']) }}">
+  <a class="uk-button uk-button-primary uk-background-primary-light uk-text-white uk-button-small uk-float-right uk-margin-small-right" href="{{ route($routes['create']) }}">
     <i class="fa fa-fw fa-plus"></i>&nbsp;New
   </a>
 @endsection
@@ -38,7 +38,7 @@
           <a href="{{ route($routes['edit'], $result['id']) }}" class="uk-button uk-button-small uk-button-primary-light uk-text-white">
             <i class="fa fa-fw fa-pencil"></i>
           </a>
-          <a href="{{ route($routes['delete'], $result['id']) }}" class="uk-button uk-button-small uk-button-danger">
+          <a href="{{ route($routes['delete'], $result['id']) }}" data-method="delete" class="uk-button uk-button-small uk-button-danger">
             <i class="fa fa-fw fa-trash-o"></i>
           </a>
         </td>
