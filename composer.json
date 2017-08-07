@@ -1,22 +1,19 @@
 {
-    "name": "jumpgate/core",
-    "description": "A core set of features for laravel sites.",
+    "name": "jumpgate/admin",
+    "description": "A basic set of administration features for laravel sites.",
     "license": "MIT",
     "authors": [
         {
             "name": "Stygian",
             "email": "stygian.warlock.v2@gmail.com"
-        },
-        {
-            "name": "Riddles",
-            "email": "riddles@dev-toolbox.com"
         }
     ],
     "require": {
         "laravel/framework": "^5.0",
-        "jumpgate/database": "*@dev",
-        "laracasts/utilities": "~2.0",
-        "camroncade/timezone": "^0.1.0"
+        "jumpgate/core": "dev-master",
+        "jumpgate/menu": "~1.0.0",
+        "jumpgate/view-resolution": "~1.0.0",
+        "jumpgate/users": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -24,29 +21,13 @@
         "phpunit/phpunit": "~5.7",
         "orchestra/testbench": "~3.4"
     },
-    "suggest": {
-        "jumpgate/menu": "Full featured menu system.",
-        "jumpgate/database": "Database helpers and collection additions.",
-        "jumpgate/view-resolution": "Automatic view resolution.",
-        "jumpgate/users": "A complete user solution."
-    },
     "autoload": {
-        "files": [
-            "src/helpers/base.php",
-            "src/helpers/math.php",
-            "src/helpers/route.php",
-            "src/helpers/strings.php",
-            "src/helpers/time.php"
+        "classmap": [
+            "src/database/seeds"
         ],
         "psr-4": {
-            "JumpGate\\Core\\": "src/JumpGate/Core"
+            "JumpGate\\Admin\\": "src/JumpGate/Admin"
         }
     },
-    "minimum-stability": "stable",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../Database"
-        }
-    ]
+    "minimum-stability": "stable"
 }
