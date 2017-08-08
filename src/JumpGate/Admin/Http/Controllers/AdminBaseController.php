@@ -36,7 +36,7 @@ abstract class AdminBaseController extends BaseController
             'title'
         ));
 
-        return $this->view('admin.index');
+        return $this->view('jumpgate_admin::index');
     }
 
     public function show($id)
