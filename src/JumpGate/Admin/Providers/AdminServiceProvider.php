@@ -44,7 +44,7 @@ class AdminServiceProvider extends ServiceProvider
         if ($this->app['config']->get('jumpgate.users.load_views')) {
             $viewPath = __DIR__ . '/../../../views/' . $this->app['config']->get('app.css_framework');
 
-            $this->app['view']->addLocation($viewPath);
+            $this->loadViewsFrom($viewPath, 'jumpgate.admin');
 
             $this->publishes([
                 $viewPath . '/admin' => resource_path('views/vendor/admin'),
