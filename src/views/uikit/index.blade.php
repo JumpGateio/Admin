@@ -16,6 +16,11 @@
     <i class="fa fa-fw fa-plus"></i>&nbsp;New
   </a>
 @endsection
+@if (Menu::exists('adminMenu') && Menu::hasLinks('adminMenu'))
+  @section('sidebar')
+    @include('layouts.partials.sidebar-menu', ['menu' => Menu::render('adminMenu')])
+  @endsection
+@endif
 <table class="uk-table uk-table-divider uk-table-hover uk-table-small">
   <thead>
     <tr>
